@@ -27,7 +27,7 @@ export class NotesController {
   constructor(private notesService: NotesService) {}
 
   @ApiOperation({ summary: "Count of notes" })
-  @ApiResponse({ status: 200, type: "count of notes N" })
+  @ApiResponse({ status: 200 })
   @Get("stats")
   async stats() {
     return this.notesService.stats();
