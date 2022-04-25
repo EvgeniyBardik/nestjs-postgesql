@@ -55,7 +55,11 @@ export class Note extends Model<Note, NoteCreationAttrs> {
   })
   @Column({
     type: DataType.STRING,
-    defaultValue: Date.now(),
+    defaultValue: new Date().toLocaleDateString("en-US", {
+      month: "long",
+      day: "2-digit",
+      year: "numeric",
+    }),
   })
   date: string;
 }
