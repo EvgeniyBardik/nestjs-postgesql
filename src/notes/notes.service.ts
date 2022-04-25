@@ -20,7 +20,7 @@ export class NotesService {
 
   async stats() {
     const count = await this.notesRepository.count();
-    return `count of notes: ${count}`;
+    return `{count: ${count}}`;
   }
   async getNoteByName(name: string) {
     const note = await this.notesRepository.findOne({ where: { name } });
