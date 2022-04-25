@@ -19,22 +19,30 @@ export class NotesService {
   }
 
   async stats() {
-    return this.notesRepository.findAll();
+    const count = await this.notesRepository.count();
+    return `count of notes: ${count}`;
   }
   async getNoteByName(name: string) {
     const note = await this.notesRepository.findOne({ where: { name } });
     return note;
   }
   async getById(id: string) {
-    return this.notesRepository.findByPk(id);
+    return await this.notesRepository.findByPk(id);
   }
 
   async remove(id: string) {
-    return (await this.notesRepository.findByPk(id)).$remove;
+    const removeNote = await this.notesRepository.findByPk(id);
+    if (!removeNote) {
+      return null;
+    }
+    removeNote.destroy();
+    return removeNote;
   }
-  //   async update(id: string, noteDto: UpdateNoteDto): Promise<Note> {
-  //     return (await this.notesRepository.findByPk(id)).update() {
-  //       new: true,
-  //     });
-  //   }
+  async update(id, noteDto: UpdateNoteDto): Promise<Note> {
+    const noteFound = await this.getById(id);
+    if (!noteFound) {
+      return null;
+    }
+    return noteFound.set(noteDto);
+  }
 }
