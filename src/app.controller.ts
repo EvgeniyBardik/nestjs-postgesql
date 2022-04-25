@@ -4,8 +4,4 @@ import { AppService } from "./app.service";
 @Controller()
 export class AppController {
   constructor(private appService: AppService) {}
-  @Get()
-  hello() {
-    return this.appService.hello();
-  }
 }

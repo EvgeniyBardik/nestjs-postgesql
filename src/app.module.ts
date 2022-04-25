@@ -4,6 +4,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { Note } from "./notes/notes.model";
 import { NotesModule } from "./notes/notes.module";
 
 @Module({
@@ -18,7 +19,7 @@ import { NotesModule } from "./notes/notes.module";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [],
+      models: [Note],
       autoLoadModels: true,
     }),
     NotesModule,
